@@ -1,0 +1,56 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  password  String
+  role      Role     @default(USER)
+  createdAt DateTime @default(now())
+
+  applications Application[] @relation("sendBy")
+
+  @@index([email])
+  @@index([role])
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model Application {
+  id          String   @id @default(uuid())
+  userId      String
+  company     String
+  role        String
+  appliedDate DateTime @default(now())
+  status      Status   @default(APPLIED)
+  salary      String?
+  location    String?
+  user        User     @relation("sendBy", fields: [userId], references: [id], onDelete: Cascade)
+  notes       Note[]   @relation("notes")
+}
+
+enum Status {
+  APPLIED
+  INTERVIEW
+  OFFER
+  REJECTED
+  GHOSTED
+}
+
+model Note {
+  id            String      @id @default(uuid())
+  applicationId String
+  text          String
+  addedAt       DateTime    @default(now())
+  application   Application @relation("notes", fields: [applicationId], references: [id], onDelete: Cascade)
+}
