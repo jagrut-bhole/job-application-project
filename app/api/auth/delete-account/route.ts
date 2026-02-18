@@ -5,7 +5,7 @@ import bcrypt from "bcryptjs";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 
-export async function DELETE(req: NextRequest) : Promise<NextResponse> {
+export async function DELETE(req: NextRequest): Promise<NextResponse> {
   try {
     const session = await getServerSession(authOptions);
 
@@ -26,67 +26,67 @@ export async function DELETE(req: NextRequest) : Promise<NextResponse> {
     const validationResult = deleteAccountPassword.safeParse(body);
 
     if (!validationResult.success) {
-        return NextResponse.json(
-            {
-                success : false,
-                message : "Server error while changing the users password"
-            },
-            {
-                status: 500
-            }
-        )
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Server error while changing the users password",
+        },
+        {
+          status: 500,
+        }
+      );
     }
 
     const { password } = validationResult.data;
 
     const user = await prisma.user.findUnique({
-        where: {
-            id: session.user.id
-        },
-        select: {
-            password: true,
-            email: true,
-            id: true
-        }
+      where: {
+        id: session.user.id,
+      },
+      select: {
+        password: true,
+        email: true,
+        id: true,
+      },
     });
 
     if (!user) {
-        return NextResponse.json(
-            {
-                success : false,
-                message : "User not Found"
-            },
-            {
-                status: 404
-            }
-        )
+      return NextResponse.json(
+        {
+          success: false,
+          message: "User not Found",
+        },
+        {
+          status: 404,
+        }
+      );
     }
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
 
-    if(!isPasswordValid) {
-        return NextResponse.json(
-            {
-                success : false,
-                message : "Invalid Password"
-            },
-            {
-                status: 401
-            }
-        )
+    if (!isPasswordValid) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Invalid Password",
+        },
+        {
+          status: 401,
+        }
+      );
     }
 
     await prisma.user.delete({
-        where: {
-            id: user.id
+      where: {
+        id: user.id,
+      },
+      select: {
+        applications: {
+          where: {
+            userId: user.id,
+          },
         },
-        select: {
-            applications: {
-                where: {
-                    userId: user.id
-                }
-            }
-        }
+      },
     });
 
     return NextResponse.json(

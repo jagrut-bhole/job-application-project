@@ -28,7 +28,8 @@ export type ApplicationMinAggregateOutputType = {
   id: string | null
   userId: string | null
   company: string | null
-  role: string | null
+  position: string | null
+  jobDescription: string | null
   appliedDate: Date | null
   status: $Enums.Status | null
   salary: string | null
@@ -39,7 +40,8 @@ export type ApplicationMaxAggregateOutputType = {
   id: string | null
   userId: string | null
   company: string | null
-  role: string | null
+  position: string | null
+  jobDescription: string | null
   appliedDate: Date | null
   status: $Enums.Status | null
   salary: string | null
@@ -50,7 +52,8 @@ export type ApplicationCountAggregateOutputType = {
   id: number
   userId: number
   company: number
-  role: number
+  position: number
+  jobDescription: number
   appliedDate: number
   status: number
   salary: number
@@ -63,7 +66,8 @@ export type ApplicationMinAggregateInputType = {
   id?: true
   userId?: true
   company?: true
-  role?: true
+  position?: true
+  jobDescription?: true
   appliedDate?: true
   status?: true
   salary?: true
@@ -74,7 +78,8 @@ export type ApplicationMaxAggregateInputType = {
   id?: true
   userId?: true
   company?: true
-  role?: true
+  position?: true
+  jobDescription?: true
   appliedDate?: true
   status?: true
   salary?: true
@@ -85,7 +90,8 @@ export type ApplicationCountAggregateInputType = {
   id?: true
   userId?: true
   company?: true
-  role?: true
+  position?: true
+  jobDescription?: true
   appliedDate?: true
   status?: true
   salary?: true
@@ -169,7 +175,8 @@ export type ApplicationGroupByOutputType = {
   id: string
   userId: string
   company: string
-  role: string
+  position: string
+  jobDescription: string
   appliedDate: Date
   status: $Enums.Status
   salary: string | null
@@ -201,7 +208,8 @@ export type ApplicationWhereInput = {
   id?: Prisma.StringFilter<"Application"> | string
   userId?: Prisma.StringFilter<"Application"> | string
   company?: Prisma.StringFilter<"Application"> | string
-  role?: Prisma.StringFilter<"Application"> | string
+  position?: Prisma.StringFilter<"Application"> | string
+  jobDescription?: Prisma.StringFilter<"Application"> | string
   appliedDate?: Prisma.DateTimeFilter<"Application"> | Date | string
   status?: Prisma.EnumStatusFilter<"Application"> | $Enums.Status
   salary?: Prisma.StringNullableFilter<"Application"> | string | null
@@ -214,7 +222,8 @@ export type ApplicationOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   company?: Prisma.SortOrder
-  role?: Prisma.SortOrder
+  position?: Prisma.SortOrder
+  jobDescription?: Prisma.SortOrder
   appliedDate?: Prisma.SortOrder
   status?: Prisma.SortOrder
   salary?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -230,7 +239,8 @@ export type ApplicationWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.ApplicationWhereInput | Prisma.ApplicationWhereInput[]
   userId?: Prisma.StringFilter<"Application"> | string
   company?: Prisma.StringFilter<"Application"> | string
-  role?: Prisma.StringFilter<"Application"> | string
+  position?: Prisma.StringFilter<"Application"> | string
+  jobDescription?: Prisma.StringFilter<"Application"> | string
   appliedDate?: Prisma.DateTimeFilter<"Application"> | Date | string
   status?: Prisma.EnumStatusFilter<"Application"> | $Enums.Status
   salary?: Prisma.StringNullableFilter<"Application"> | string | null
@@ -243,7 +253,8 @@ export type ApplicationOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   company?: Prisma.SortOrder
-  role?: Prisma.SortOrder
+  position?: Prisma.SortOrder
+  jobDescription?: Prisma.SortOrder
   appliedDate?: Prisma.SortOrder
   status?: Prisma.SortOrder
   salary?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -260,7 +271,8 @@ export type ApplicationScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"Application"> | string
   userId?: Prisma.StringWithAggregatesFilter<"Application"> | string
   company?: Prisma.StringWithAggregatesFilter<"Application"> | string
-  role?: Prisma.StringWithAggregatesFilter<"Application"> | string
+  position?: Prisma.StringWithAggregatesFilter<"Application"> | string
+  jobDescription?: Prisma.StringWithAggregatesFilter<"Application"> | string
   appliedDate?: Prisma.DateTimeWithAggregatesFilter<"Application"> | Date | string
   status?: Prisma.EnumStatusWithAggregatesFilter<"Application"> | $Enums.Status
   salary?: Prisma.StringNullableWithAggregatesFilter<"Application"> | string | null
@@ -270,7 +282,8 @@ export type ApplicationScalarWhereWithAggregatesInput = {
 export type ApplicationCreateInput = {
   id?: string
   company: string
-  role: string
+  position: string
+  jobDescription: string
   appliedDate?: Date | string
   status?: $Enums.Status
   salary?: string | null
@@ -283,7 +296,8 @@ export type ApplicationUncheckedCreateInput = {
   id?: string
   userId: string
   company: string
-  role: string
+  position: string
+  jobDescription: string
   appliedDate?: Date | string
   status?: $Enums.Status
   salary?: string | null
@@ -294,7 +308,8 @@ export type ApplicationUncheckedCreateInput = {
 export type ApplicationUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   company?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.StringFieldUpdateOperationsInput | string
+  position?: Prisma.StringFieldUpdateOperationsInput | string
+  jobDescription?: Prisma.StringFieldUpdateOperationsInput | string
   appliedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
   salary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -307,7 +322,8 @@ export type ApplicationUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   company?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.StringFieldUpdateOperationsInput | string
+  position?: Prisma.StringFieldUpdateOperationsInput | string
+  jobDescription?: Prisma.StringFieldUpdateOperationsInput | string
   appliedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
   salary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -319,7 +335,8 @@ export type ApplicationCreateManyInput = {
   id?: string
   userId: string
   company: string
-  role: string
+  position: string
+  jobDescription: string
   appliedDate?: Date | string
   status?: $Enums.Status
   salary?: string | null
@@ -329,7 +346,8 @@ export type ApplicationCreateManyInput = {
 export type ApplicationUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   company?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.StringFieldUpdateOperationsInput | string
+  position?: Prisma.StringFieldUpdateOperationsInput | string
+  jobDescription?: Prisma.StringFieldUpdateOperationsInput | string
   appliedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
   salary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -340,7 +358,8 @@ export type ApplicationUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   company?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.StringFieldUpdateOperationsInput | string
+  position?: Prisma.StringFieldUpdateOperationsInput | string
+  jobDescription?: Prisma.StringFieldUpdateOperationsInput | string
   appliedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
   salary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -361,7 +380,8 @@ export type ApplicationCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   company?: Prisma.SortOrder
-  role?: Prisma.SortOrder
+  position?: Prisma.SortOrder
+  jobDescription?: Prisma.SortOrder
   appliedDate?: Prisma.SortOrder
   status?: Prisma.SortOrder
   salary?: Prisma.SortOrder
@@ -372,7 +392,8 @@ export type ApplicationMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   company?: Prisma.SortOrder
-  role?: Prisma.SortOrder
+  position?: Prisma.SortOrder
+  jobDescription?: Prisma.SortOrder
   appliedDate?: Prisma.SortOrder
   status?: Prisma.SortOrder
   salary?: Prisma.SortOrder
@@ -383,7 +404,8 @@ export type ApplicationMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   company?: Prisma.SortOrder
-  role?: Prisma.SortOrder
+  position?: Prisma.SortOrder
+  jobDescription?: Prisma.SortOrder
   appliedDate?: Prisma.SortOrder
   status?: Prisma.SortOrder
   salary?: Prisma.SortOrder
@@ -462,7 +484,8 @@ export type ApplicationUpdateOneRequiredWithoutNotesNestedInput = {
 export type ApplicationCreateWithoutUserInput = {
   id?: string
   company: string
-  role: string
+  position: string
+  jobDescription: string
   appliedDate?: Date | string
   status?: $Enums.Status
   salary?: string | null
@@ -473,7 +496,8 @@ export type ApplicationCreateWithoutUserInput = {
 export type ApplicationUncheckedCreateWithoutUserInput = {
   id?: string
   company: string
-  role: string
+  position: string
+  jobDescription: string
   appliedDate?: Date | string
   status?: $Enums.Status
   salary?: string | null
@@ -514,7 +538,8 @@ export type ApplicationScalarWhereInput = {
   id?: Prisma.StringFilter<"Application"> | string
   userId?: Prisma.StringFilter<"Application"> | string
   company?: Prisma.StringFilter<"Application"> | string
-  role?: Prisma.StringFilter<"Application"> | string
+  position?: Prisma.StringFilter<"Application"> | string
+  jobDescription?: Prisma.StringFilter<"Application"> | string
   appliedDate?: Prisma.DateTimeFilter<"Application"> | Date | string
   status?: Prisma.EnumStatusFilter<"Application"> | $Enums.Status
   salary?: Prisma.StringNullableFilter<"Application"> | string | null
@@ -524,7 +549,8 @@ export type ApplicationScalarWhereInput = {
 export type ApplicationCreateWithoutNotesInput = {
   id?: string
   company: string
-  role: string
+  position: string
+  jobDescription: string
   appliedDate?: Date | string
   status?: $Enums.Status
   salary?: string | null
@@ -536,7 +562,8 @@ export type ApplicationUncheckedCreateWithoutNotesInput = {
   id?: string
   userId: string
   company: string
-  role: string
+  position: string
+  jobDescription: string
   appliedDate?: Date | string
   status?: $Enums.Status
   salary?: string | null
@@ -562,7 +589,8 @@ export type ApplicationUpdateToOneWithWhereWithoutNotesInput = {
 export type ApplicationUpdateWithoutNotesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   company?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.StringFieldUpdateOperationsInput | string
+  position?: Prisma.StringFieldUpdateOperationsInput | string
+  jobDescription?: Prisma.StringFieldUpdateOperationsInput | string
   appliedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
   salary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -574,7 +602,8 @@ export type ApplicationUncheckedUpdateWithoutNotesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   company?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.StringFieldUpdateOperationsInput | string
+  position?: Prisma.StringFieldUpdateOperationsInput | string
+  jobDescription?: Prisma.StringFieldUpdateOperationsInput | string
   appliedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
   salary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -584,7 +613,8 @@ export type ApplicationUncheckedUpdateWithoutNotesInput = {
 export type ApplicationCreateManyUserInput = {
   id?: string
   company: string
-  role: string
+  position: string
+  jobDescription: string
   appliedDate?: Date | string
   status?: $Enums.Status
   salary?: string | null
@@ -594,7 +624,8 @@ export type ApplicationCreateManyUserInput = {
 export type ApplicationUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   company?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.StringFieldUpdateOperationsInput | string
+  position?: Prisma.StringFieldUpdateOperationsInput | string
+  jobDescription?: Prisma.StringFieldUpdateOperationsInput | string
   appliedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
   salary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -605,7 +636,8 @@ export type ApplicationUpdateWithoutUserInput = {
 export type ApplicationUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   company?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.StringFieldUpdateOperationsInput | string
+  position?: Prisma.StringFieldUpdateOperationsInput | string
+  jobDescription?: Prisma.StringFieldUpdateOperationsInput | string
   appliedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
   salary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -616,7 +648,8 @@ export type ApplicationUncheckedUpdateWithoutUserInput = {
 export type ApplicationUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   company?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.StringFieldUpdateOperationsInput | string
+  position?: Prisma.StringFieldUpdateOperationsInput | string
+  jobDescription?: Prisma.StringFieldUpdateOperationsInput | string
   appliedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
   salary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -658,7 +691,8 @@ export type ApplicationSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   id?: boolean
   userId?: boolean
   company?: boolean
-  role?: boolean
+  position?: boolean
+  jobDescription?: boolean
   appliedDate?: boolean
   status?: boolean
   salary?: boolean
@@ -672,7 +706,8 @@ export type ApplicationSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   id?: boolean
   userId?: boolean
   company?: boolean
-  role?: boolean
+  position?: boolean
+  jobDescription?: boolean
   appliedDate?: boolean
   status?: boolean
   salary?: boolean
@@ -684,7 +719,8 @@ export type ApplicationSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   id?: boolean
   userId?: boolean
   company?: boolean
-  role?: boolean
+  position?: boolean
+  jobDescription?: boolean
   appliedDate?: boolean
   status?: boolean
   salary?: boolean
@@ -696,14 +732,15 @@ export type ApplicationSelectScalar = {
   id?: boolean
   userId?: boolean
   company?: boolean
-  role?: boolean
+  position?: boolean
+  jobDescription?: boolean
   appliedDate?: boolean
   status?: boolean
   salary?: boolean
   location?: boolean
 }
 
-export type ApplicationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "company" | "role" | "appliedDate" | "status" | "salary" | "location", ExtArgs["result"]["application"]>
+export type ApplicationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "company" | "position" | "jobDescription" | "appliedDate" | "status" | "salary" | "location", ExtArgs["result"]["application"]>
 export type ApplicationInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   notes?: boolean | Prisma.Application$notesArgs<ExtArgs>
@@ -726,7 +763,8 @@ export type $ApplicationPayload<ExtArgs extends runtime.Types.Extensions.Interna
     id: string
     userId: string
     company: string
-    role: string
+    position: string
+    jobDescription: string
     appliedDate: Date
     status: $Enums.Status
     salary: string | null
@@ -1159,7 +1197,8 @@ export interface ApplicationFieldRefs {
   readonly id: Prisma.FieldRef<"Application", 'String'>
   readonly userId: Prisma.FieldRef<"Application", 'String'>
   readonly company: Prisma.FieldRef<"Application", 'String'>
-  readonly role: Prisma.FieldRef<"Application", 'String'>
+  readonly position: Prisma.FieldRef<"Application", 'String'>
+  readonly jobDescription: Prisma.FieldRef<"Application", 'String'>
   readonly appliedDate: Prisma.FieldRef<"Application", 'DateTime'>
   readonly status: Prisma.FieldRef<"Application", 'Status'>
   readonly salary: Prisma.FieldRef<"Application", 'String'>

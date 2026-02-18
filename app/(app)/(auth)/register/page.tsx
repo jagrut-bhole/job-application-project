@@ -1,0 +1,174 @@
+"use client"
+
+import React, { useState } from "react";
+import { signIn } from "next-auth/react";
+import { useToast } from "@/components/ui/toast-1";
+import { registerSchema } from "@/types/authTypes";
+import { registerReq } from "@/apiAxios/authRequests";
+import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Eye, EyeOff, Loader2 } from "lucide-react";
+import Link from "next/link";
+
+export default function RegisterPage() {
+    const { showToast } = useToast();
+    const router = useRouter();
+
+    const [name, setName] = useState<string>("");
+    const [email, setEmail] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
+
+    const [loading, setLoading] = useState<boolean>(false);
+
+    const [showPassword, setShowPassword] = useState<boolean>(false);
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setLoading(true);
+
+        const validationResult = registerSchema.safeParse({
+            name,
+            email,
+            password
+        });
+
+        if (!validationResult.success) {
+            showToast(validationResult.error.message, "error", "top-left");
+            setLoading(false);
+            return null;
+        }
+
+        try {
+            const { success, message } = await registerReq({
+                name,
+                email,
+                password
+            });
+
+            if (success) {
+                const signin = await signIn("credentials", {
+                    email: email,
+                    password: password,
+                    redirect: false
+                });
+
+                if (signin?.ok && !signin.error) {
+                    showToast("Registration Successsful", "success", "top-right");
+                    router.push('/dashboard');
+                } else {
+                    showToast(message, "error", "top-right");
+                }
+            }
+        } catch (error) {
+            console.log("Register Error: ", error);
+            showToast("Error while registering the user", "error", "top-right")
+            return null;
+        } finally {
+            setLoading(false);
+        }
+    }
+    return (
+        <div className="overflow-y-hidden bg-[#030303]">
+            <div className="min-h-screen flex items-center justify-center px-4">
+                <div className="max-w-md w-full space-y-8 bg-[#101010] rounded-4xl py-20 px-8">
+                    <div className="text-center ">
+                        <h2 className="text-3xl font-bold text-white">Create Account</h2>
+                        <p className="mt-2 text-sm text-gray-400">
+                            Get started by creating your account below.
+                        </p>
+                    </div>
+
+                    <form onSubmit={handleSubmit}>
+                        <div className="space-y-4">
+                            <div>
+                                <Label className="text-white mb-1.5" htmlFor="name">
+                                    Name
+                                </Label>
+                                <Input
+                                    id="name"
+                                    type="text"
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
+                                    placeholder="Your Name"
+                                    required
+                                    className="text-white"
+                                />
+                            </div>
+                            <div>
+                                <Label className="text-white mb-1.5" htmlFor="email">
+                                    Email
+                                </Label>
+                                <Input
+                                    id="email"
+                                    type="email"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    placeholder="Your Email"
+                                    required
+                                    className="text-white"
+                                />
+                            </div>
+                            <div>
+                                <Label className="text-white mb-1.5" htmlFor="password">
+                                    Password
+                                </Label>
+                                <div className="relative">
+                                    <Input
+                                        id="password"
+                                        type={showPassword ? "text" : "password"}
+                                        value={password}
+                                        minLength={8}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                        placeholder="Your Password"
+                                        required
+                                        className="text-white pr-10"
+                                    />
+                                    <button
+                                        type="button"
+                                        onClick={() => setShowPassword(!showPassword)}
+                                        className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-gray-200 transition-colors"
+                                        aria-label={showPassword ? "Hide password" : "Show password"}
+                                    >
+                                        {showPassword ? (
+                                            <EyeOff className="h-5 w-5" />
+                                        ) : (
+                                            <Eye className="h-5 w-5" />
+                                        )}
+                                    </button>
+                                </div>
+                            </div>
+                            <p className="text-xs text-gray-300">
+                                Must be at least 8 characters
+                            </p>
+                        </div>
+                        <Button
+                            type="submit"
+                            disabled={loading}
+                            className="w-full mt-6 text-black bg-white hover:bg-white/80 cursor-pointer"
+                        >
+                            {loading ? (
+                                <>
+                                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                    Please Wait...
+                                </>
+                            ) : (
+                                "Sign Up"
+                            )}
+                        </Button>
+                        <div className="text-center text-sm mt-5">
+                            <span className="text-gray-400">Already have an account? </span>
+                            <Link
+                                href="/signin"
+                                className="font-medium text-white hover:text-gray-300"
+                            >
+                                Sign in
+                            </Link>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    );
+}

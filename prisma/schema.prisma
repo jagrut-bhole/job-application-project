@@ -27,16 +27,17 @@ enum Role {
 }
 
 model Application {
-  id          String   @id @default(uuid())
-  userId      String
-  company     String
-  role        String
-  appliedDate DateTime @default(now())
-  status      Status   @default(APPLIED)
-  salary      String?
-  location    String?
-  user        User     @relation("sendBy", fields: [userId], references: [id], onDelete: Cascade)
-  notes       Note[]   @relation("notes")
+  id             String   @id @default(uuid())
+  userId         String
+  company        String
+  position       String
+  jobDescription String
+  appliedDate    DateTime @default(now())
+  status         Status   @default(APPLIED)
+  salary         String?
+  location       String?
+  user           User     @relation("sendBy", fields: [userId], references: [id], onDelete: Cascade)
+  notes          Note[]   @relation("notes")
 }
 
 enum Status {

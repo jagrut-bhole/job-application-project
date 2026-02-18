@@ -1,10 +1,10 @@
-import { authOptions } from "@/lib/auth";
 import prisma from "@/lib/prisma";
+import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
-import { ProfileSchemaResponse } from "./profileSchema";
+import { AppliedSchemaResponse } from './appliedSchema'
 
-export async function POST(): Promise<NextResponse<ProfileSchemaResponse>> {
+export async function POST(): Promise<NextResponse<AppliedSchemaResponse>> {
   try {
     const session = await getServerSession(authOptions);
 
@@ -20,23 +20,22 @@ export async function POST(): Promise<NextResponse<ProfileSchemaResponse>> {
       );
     }
 
-    const userProfile = await prisma.user.findUnique({
+    const user = await prisma.application.findMany({
       where: {
-        id: session.user.id,
+        userId: session.user.id,
       },
       select: {
         id: true,
-        role: true,
-        name: true,
-        email: true,
-        createdAt: true,
-        _count: {
+        company: true,
+        position: true,
+        jobDescription: true,
+        appliedDate: true,
+        status: true,
+        salary: true,
+        location: true,
+        notes: {
           select: {
-            applications: {
-              where: {
-                userId: session.user.id,
-              },
-            },
+            text: true,
           },
         },
       },
@@ -45,20 +44,19 @@ export async function POST(): Promise<NextResponse<ProfileSchemaResponse>> {
     return NextResponse.json(
       {
         success: true,
-        message: "Profile fetch Succesfully",
-        data: userProfile,
+        message: "Applied Applications fetched successfully",
+        data: user,
       },
       {
         status: 200,
       }
     );
   } catch (error) {
-    console.log("Error at /api/auth/profile : ", error);
-
+    console.log("Error at /api/auth/applied : ", error);
     return NextResponse.json(
       {
         success: false,
-        message: "Server error while fetching the users profile",
+        message: "Server error while fetching applications",
       },
       {
         status: 500,
