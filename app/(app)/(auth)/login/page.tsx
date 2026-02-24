@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { registerSchema } from "@/types/authTypes";
-import { signIn } from "next-auth/react";
+import { getSession, signIn } from "next-auth/react";
 import { useToast } from "@/components/ui/toast-1";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -12,77 +12,79 @@ import { Eye, EyeOff, Loader2 } from "lucide-react";
 import Link from "next/link";
 
 export default function LoginPage() {
-    const { showToast } = useToast();
+  const { showToast } = useToast();
 
-    const router = useRouter();
+  const router = useRouter();
 
-    const [email, setEmail] = useState<string>("");
-    const [password, setPassword] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
-    const [loading, setLoading] = useState<boolean>(false);
-    const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
 
-    const loginSchema = registerSchema.pick({
-        email: true,
-        password: true
-    })
+  const loginSchema = registerSchema.pick({
+    email: true,
+    password: true,
+  });
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
 
-        setLoading(true);
+    setLoading(true);
 
-        const validationResult = loginSchema.safeParse({
-            email,
-            password
-        });
+    const validationResult = loginSchema.safeParse({
+      email,
+      password,
+    });
 
-        if (!validationResult.success) {
-            showToast(validationResult.error.message, "error", "top-right");
-            setLoading(false);
-            return null;
-        }
-
-        try {
-            const result = await signIn("credentials", {
-                email,
-                password,
-                redirect: false
-            });
-
-            if (result?.error) {
-                showToast(result.error);
-                setLoading(false);
-                return null;
-            }
-
-            if (result?.ok) {
-                showToast("Login successfull!!", "success", "top-right");
-                router.push('/dashboard');
-            }
-        } catch (error) {
-            console.log("Login Error: ", error);
-            showToast("Error while signing the user", "error", "top-right");
-        } finally {
-            setLoading(false);
-        }
+    if (!validationResult.success) {
+      showToast(validationResult.error.message, "error", "top-right");
+      setLoading(false);
+      return null;
     }
-    return (
+
+    try {
+      const result = await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+      });
+
+      if (result?.error) {
+        showToast(result.error);
+        setLoading(false);
+        return null;
+      }
+
+      if (result?.ok) {
+        const session = await getSession();
+        const userRole = session?.user.role;
+
+        if (userRole === "ADMIN") {
+          router.push("/admin");
+        } else {
+          router.push("/dashboard");
+        }
+
+        showToast("Login Successfull", "success", "top-right");
+      }
+    } catch (error) {
+      console.log("Login Error: ", error);
+      showToast("Error while signing the user", "error", "top-right");
+    } finally {
+      setLoading(false);
+    }
+  };
+  return (
     <div className="overflow-y-hidden bg-[#030303]">
       <div className="min-h-screen flex items-center justify-center px-4">
         <div className="max-w-md w-full space-y-8 bg-[#101010] rounded-4xl py-20 px-8">
           <div className="text-center">
-            <h2 className="text-3xl font-bold text-white">
-              Sign In to Your Account
-            </h2>
-            <p className="mt-2 text-sm text-gray-400">
-              Welcome back! Please enter your details.
-            </p>
+            <h2 className="text-3xl font-bold text-white">Sign In to Your Account</h2>
+            <p className="mt-2 text-sm text-gray-400">Welcome back! Please enter your details.</p>
           </div>
 
-          <form onSubmit={
-            handleSubmit
-          }>
+          <form onSubmit={handleSubmit}>
             <div className="space-y-6">
               {/* Email */}
               <div>
@@ -116,9 +118,7 @@ export default function LoginPage() {
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
                     className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-200 hover:text-gray-400 transition-colors"
-                    aria-label={
-                      showPassword ? "Hide password" : "Show password"
-                    }
+                    aria-label={showPassword ? "Hide password" : "Show password"}
                   >
                     {showPassword ? (
                       <EyeOff className="h-5 w-5 cursor-pointer" />
@@ -144,13 +144,8 @@ export default function LoginPage() {
               )}
             </Button>
             <div className="text-center text-sm mt-5">
-              <span className="text-gray-400">
-                Don&apos;t have an account?{" "}
-              </span>
-              <Link
-                href="/register"
-                className="font-medium text-white hover:text-gray-300"
-              >
+              <span className="text-gray-400">Don&apos;t have an account? </span>
+              <Link href="/register" className="font-medium text-white hover:text-gray-300">
                 Sign Up
               </Link>
             </div>

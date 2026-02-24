@@ -8,14 +8,20 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(uuid())
-  name      String
-  email     String   @unique
-  password  String
-  role      Role     @default(USER)
-  createdAt DateTime @default(now())
+  id           String   @id @default(uuid())
+  name         String
+  email        String   @unique
+  password     String
+  role         Role     @default(USER)
+  bio          String?
+  skills       String[]
+  resumeUrl    String?
+  profileImage String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 
-  applications Application[] @relation("sendBy")
+  applications Application[] @relation("appliedBy")
+  companies    Company[]     @relation("managedBy")
 
   @@index([email])
   @@index([role])
@@ -26,32 +32,107 @@ enum Role {
   ADMIN
 }
 
+// ─────────────────────────────────────────
+// COMPANY  (created and managed by ADMIN)
+// ─────────────────────────────────────────
+model Company {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  website     String?
+  logoUrl     String?
+  location    String[]
+  adminId     String @unique
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  admin User  @relation("managedBy", fields: [adminId], references: [id], onDelete: Cascade)
+  jobs  Job[] @relation("postedIn")
+
+  @@index([adminId])
+}
+
+// ─────────────────────────────────────────
+// JOB  (posted by ADMIN under a Company)
+// ─────────────────────────────────────────
+model Job {
+  id          String    @id @default(uuid())
+  title       String
+  description String
+  salary      String?
+  location    String?
+  type        JobType   @default(FULL_TIME)
+  status      JobStatus @default(OPEN)
+  skills      String[]
+  companyId   String
+  postedById  String
+  postedAt    DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  expiresAt   DateTime?
+
+  company      Company       @relation("postedIn", fields: [companyId], references: [id], onDelete: Cascade)
+  applications Application[] @relation("jobApplications")
+
+  @@index([companyId])
+  @@index([status])
+  @@index([type])
+}
+
+enum JobType {
+  FULL_TIME
+  PART_TIME
+  CONTRACT
+  INTERNSHIP
+  REMOTE
+}
+
+enum JobStatus {
+  OPEN
+  CLOSED
+  PAUSED
+}
+
+// ─────────────────────────────────────────
+// APPLICATION  (user applies to a job)
+// ─────────────────────────────────────────
 model Application {
-  id             String   @id @default(uuid())
-  userId         String
-  company        String
-  position       String
-  jobDescription String
-  appliedDate    DateTime @default(now())
-  status         Status   @default(APPLIED)
-  salary         String?
-  location       String?
-  user           User     @relation("sendBy", fields: [userId], references: [id], onDelete: Cascade)
-  notes          Note[]   @relation("notes")
+  id          String            @id @default(uuid())
+  userId      String
+  jobId       String
+  status      ApplicationStatus @default(PENDING)
+  coverLetter String?
+  appliedAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+
+  user  User   @relation("appliedBy", fields: [userId], references: [id], onDelete: Cascade)
+  job   Job    @relation("jobApplications", fields: [jobId], references: [id], onDelete: Cascade)
+  notes Note[] @relation("appNotes")
+
+  @@unique([userId, jobId]) // prevents duplicate applications
+  @@index([userId])
+  @@index([jobId])
+  @@index([status])
 }
 
-enum Status {
-  APPLIED
-  INTERVIEW
-  OFFER
-  REJECTED
-  GHOSTED
+enum ApplicationStatus {
+  PENDING // just applied, not reviewed yet
+  REVIEWED // admin opened the application
+  SHORTLISTED // moved to shortlist
+  INTERVIEW // interview scheduled
+  OFFER // offer extended
+  REJECTED // rejected by admin
+  HIRED // hired
+  WITHDRAWN // withdrawn by user
 }
 
+// ─────────────────────────────────────────
+// NOTE  (admin adds notes to an application)
+// ─────────────────────────────────────────
 model Note {
-  id            String      @id @default(uuid())
+  id            String   @id @default(uuid())
   applicationId String
   text          String
-  addedAt       DateTime    @default(now())
-  application   Application @relation("notes", fields: [applicationId], references: [id], onDelete: Cascade)
+  addedAt       DateTime @default(now())
+
+  application Application @relation("appNotes", fields: [applicationId], references: [id], onDelete: Cascade)
 }

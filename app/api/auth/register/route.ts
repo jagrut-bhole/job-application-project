@@ -23,9 +23,9 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
 
     const { email, name, password } = validationResult.data;
 
-    console.log("name:",name)
-    console.log("email:",email)
-    console.log("password:",password)
+    console.log("name:", name);
+    console.log("email:", email);
+    console.log("password:", password);
 
     const user = await prisma.user.findUnique({
       where: {

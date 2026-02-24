@@ -2,7 +2,7 @@ import prisma from "@/lib/prisma";
 import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
-import { AppliedSchemaResponse } from './appliedSchema'
+import { AppliedSchemaResponse } from "./appliedSchema";
 
 export async function POST(): Promise<NextResponse<AppliedSchemaResponse>> {
   try {

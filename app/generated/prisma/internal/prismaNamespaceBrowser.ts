@@ -52,6 +52,8 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   User: 'User',
+  Company: 'Company',
+  Job: 'Job',
   Application: 'Application',
   Note: 'Note'
 } as const
@@ -78,22 +80,59 @@ export const UserScalarFieldEnum = {
   email: 'email',
   password: 'password',
   role: 'role',
-  createdAt: 'createdAt'
+  bio: 'bio',
+  skills: 'skills',
+  resumeUrl: 'resumeUrl',
+  profileImage: 'profileImage',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
+export const CompanyScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  website: 'website',
+  logoUrl: 'logoUrl',
+  location: 'location',
+  adminId: 'adminId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CompanyScalarFieldEnum = (typeof CompanyScalarFieldEnum)[keyof typeof CompanyScalarFieldEnum]
+
+
+export const JobScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  salary: 'salary',
+  location: 'location',
+  type: 'type',
+  status: 'status',
+  skills: 'skills',
+  companyId: 'companyId',
+  postedById: 'postedById',
+  postedAt: 'postedAt',
+  updatedAt: 'updatedAt',
+  expiresAt: 'expiresAt'
+} as const
+
+export type JobScalarFieldEnum = (typeof JobScalarFieldEnum)[keyof typeof JobScalarFieldEnum]
+
+
 export const ApplicationScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
-  company: 'company',
-  position: 'position',
-  jobDescription: 'jobDescription',
-  appliedDate: 'appliedDate',
+  jobId: 'jobId',
   status: 'status',
-  salary: 'salary',
-  location: 'location'
+  coverLetter: 'coverLetter',
+  appliedAt: 'appliedAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type ApplicationScalarFieldEnum = (typeof ApplicationScalarFieldEnum)[keyof typeof ApplicationScalarFieldEnum]

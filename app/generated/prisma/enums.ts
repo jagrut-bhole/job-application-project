@@ -17,12 +17,35 @@ export const Role = {
 export type Role = (typeof Role)[keyof typeof Role]
 
 
-export const Status = {
-  APPLIED: 'APPLIED',
+export const JobType = {
+  FULL_TIME: 'FULL_TIME',
+  PART_TIME: 'PART_TIME',
+  CONTRACT: 'CONTRACT',
+  INTERNSHIP: 'INTERNSHIP',
+  REMOTE: 'REMOTE'
+} as const
+
+export type JobType = (typeof JobType)[keyof typeof JobType]
+
+
+export const JobStatus = {
+  OPEN: 'OPEN',
+  CLOSED: 'CLOSED',
+  PAUSED: 'PAUSED'
+} as const
+
+export type JobStatus = (typeof JobStatus)[keyof typeof JobStatus]
+
+
+export const ApplicationStatus = {
+  PENDING: 'PENDING',
+  REVIEWED: 'REVIEWED',
+  SHORTLISTED: 'SHORTLISTED',
   INTERVIEW: 'INTERVIEW',
   OFFER: 'OFFER',
   REJECTED: 'REJECTED',
-  GHOSTED: 'GHOSTED'
+  HIRED: 'HIRED',
+  WITHDRAWN: 'WITHDRAWN'
 } as const
 
-export type Status = (typeof Status)[keyof typeof Status]
+export type ApplicationStatus = (typeof ApplicationStatus)[keyof typeof ApplicationStatus]
