@@ -201,6 +201,7 @@ export type ApplicationWhereInput = {
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   job?: Prisma.XOR<Prisma.JobScalarRelationFilter, Prisma.JobWhereInput>
   notes?: Prisma.NoteListRelationFilter
+  messages?: Prisma.MessageListRelationFilter
 }
 
 export type ApplicationOrderByWithRelationInput = {
@@ -214,6 +215,7 @@ export type ApplicationOrderByWithRelationInput = {
   user?: Prisma.UserOrderByWithRelationInput
   job?: Prisma.JobOrderByWithRelationInput
   notes?: Prisma.NoteOrderByRelationAggregateInput
+  messages?: Prisma.MessageOrderByRelationAggregateInput
 }
 
 export type ApplicationWhereUniqueInput = Prisma.AtLeast<{
@@ -231,6 +233,7 @@ export type ApplicationWhereUniqueInput = Prisma.AtLeast<{
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   job?: Prisma.XOR<Prisma.JobScalarRelationFilter, Prisma.JobWhereInput>
   notes?: Prisma.NoteListRelationFilter
+  messages?: Prisma.MessageListRelationFilter
 }, "id" | "userId_jobId">
 
 export type ApplicationOrderByWithAggregationInput = {
@@ -268,6 +271,7 @@ export type ApplicationCreateInput = {
   user: Prisma.UserCreateNestedOneWithoutApplicationsInput
   job: Prisma.JobCreateNestedOneWithoutApplicationsInput
   notes?: Prisma.NoteCreateNestedManyWithoutApplicationInput
+  messages?: Prisma.MessageCreateNestedManyWithoutApplicationInput
 }
 
 export type ApplicationUncheckedCreateInput = {
@@ -279,6 +283,7 @@ export type ApplicationUncheckedCreateInput = {
   appliedAt?: Date | string
   updatedAt?: Date | string
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutApplicationInput
+  messages?: Prisma.MessageUncheckedCreateNestedManyWithoutApplicationInput
 }
 
 export type ApplicationUpdateInput = {
@@ -290,6 +295,7 @@ export type ApplicationUpdateInput = {
   user?: Prisma.UserUpdateOneRequiredWithoutApplicationsNestedInput
   job?: Prisma.JobUpdateOneRequiredWithoutApplicationsNestedInput
   notes?: Prisma.NoteUpdateManyWithoutApplicationNestedInput
+  messages?: Prisma.MessageUpdateManyWithoutApplicationNestedInput
 }
 
 export type ApplicationUncheckedUpdateInput = {
@@ -301,6 +307,7 @@ export type ApplicationUncheckedUpdateInput = {
   appliedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   notes?: Prisma.NoteUncheckedUpdateManyWithoutApplicationNestedInput
+  messages?: Prisma.MessageUncheckedUpdateManyWithoutApplicationNestedInput
 }
 
 export type ApplicationCreateManyInput = {
@@ -483,6 +490,20 @@ export type ApplicationUpdateOneRequiredWithoutNotesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ApplicationUpdateToOneWithWhereWithoutNotesInput, Prisma.ApplicationUpdateWithoutNotesInput>, Prisma.ApplicationUncheckedUpdateWithoutNotesInput>
 }
 
+export type ApplicationCreateNestedOneWithoutMessagesInput = {
+  create?: Prisma.XOR<Prisma.ApplicationCreateWithoutMessagesInput, Prisma.ApplicationUncheckedCreateWithoutMessagesInput>
+  connectOrCreate?: Prisma.ApplicationCreateOrConnectWithoutMessagesInput
+  connect?: Prisma.ApplicationWhereUniqueInput
+}
+
+export type ApplicationUpdateOneRequiredWithoutMessagesNestedInput = {
+  create?: Prisma.XOR<Prisma.ApplicationCreateWithoutMessagesInput, Prisma.ApplicationUncheckedCreateWithoutMessagesInput>
+  connectOrCreate?: Prisma.ApplicationCreateOrConnectWithoutMessagesInput
+  upsert?: Prisma.ApplicationUpsertWithoutMessagesInput
+  connect?: Prisma.ApplicationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ApplicationUpdateToOneWithWhereWithoutMessagesInput, Prisma.ApplicationUpdateWithoutMessagesInput>, Prisma.ApplicationUncheckedUpdateWithoutMessagesInput>
+}
+
 export type ApplicationCreateWithoutUserInput = {
   id?: string
   status?: $Enums.ApplicationStatus
@@ -491,6 +512,7 @@ export type ApplicationCreateWithoutUserInput = {
   updatedAt?: Date | string
   job: Prisma.JobCreateNestedOneWithoutApplicationsInput
   notes?: Prisma.NoteCreateNestedManyWithoutApplicationInput
+  messages?: Prisma.MessageCreateNestedManyWithoutApplicationInput
 }
 
 export type ApplicationUncheckedCreateWithoutUserInput = {
@@ -501,6 +523,7 @@ export type ApplicationUncheckedCreateWithoutUserInput = {
   appliedAt?: Date | string
   updatedAt?: Date | string
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutApplicationInput
+  messages?: Prisma.MessageUncheckedCreateNestedManyWithoutApplicationInput
 }
 
 export type ApplicationCreateOrConnectWithoutUserInput = {
@@ -550,6 +573,7 @@ export type ApplicationCreateWithoutJobInput = {
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutApplicationsInput
   notes?: Prisma.NoteCreateNestedManyWithoutApplicationInput
+  messages?: Prisma.MessageCreateNestedManyWithoutApplicationInput
 }
 
 export type ApplicationUncheckedCreateWithoutJobInput = {
@@ -560,6 +584,7 @@ export type ApplicationUncheckedCreateWithoutJobInput = {
   appliedAt?: Date | string
   updatedAt?: Date | string
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutApplicationInput
+  messages?: Prisma.MessageUncheckedCreateNestedManyWithoutApplicationInput
 }
 
 export type ApplicationCreateOrConnectWithoutJobInput = {
@@ -596,6 +621,7 @@ export type ApplicationCreateWithoutNotesInput = {
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutApplicationsInput
   job: Prisma.JobCreateNestedOneWithoutApplicationsInput
+  messages?: Prisma.MessageCreateNestedManyWithoutApplicationInput
 }
 
 export type ApplicationUncheckedCreateWithoutNotesInput = {
@@ -606,6 +632,7 @@ export type ApplicationUncheckedCreateWithoutNotesInput = {
   coverLetter?: string | null
   appliedAt?: Date | string
   updatedAt?: Date | string
+  messages?: Prisma.MessageUncheckedCreateNestedManyWithoutApplicationInput
 }
 
 export type ApplicationCreateOrConnectWithoutNotesInput = {
@@ -632,6 +659,7 @@ export type ApplicationUpdateWithoutNotesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutApplicationsNestedInput
   job?: Prisma.JobUpdateOneRequiredWithoutApplicationsNestedInput
+  messages?: Prisma.MessageUpdateManyWithoutApplicationNestedInput
 }
 
 export type ApplicationUncheckedUpdateWithoutNotesInput = {
@@ -642,6 +670,67 @@ export type ApplicationUncheckedUpdateWithoutNotesInput = {
   coverLetter?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   appliedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  messages?: Prisma.MessageUncheckedUpdateManyWithoutApplicationNestedInput
+}
+
+export type ApplicationCreateWithoutMessagesInput = {
+  id?: string
+  status?: $Enums.ApplicationStatus
+  coverLetter?: string | null
+  appliedAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutApplicationsInput
+  job: Prisma.JobCreateNestedOneWithoutApplicationsInput
+  notes?: Prisma.NoteCreateNestedManyWithoutApplicationInput
+}
+
+export type ApplicationUncheckedCreateWithoutMessagesInput = {
+  id?: string
+  userId: string
+  jobId: string
+  status?: $Enums.ApplicationStatus
+  coverLetter?: string | null
+  appliedAt?: Date | string
+  updatedAt?: Date | string
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutApplicationInput
+}
+
+export type ApplicationCreateOrConnectWithoutMessagesInput = {
+  where: Prisma.ApplicationWhereUniqueInput
+  create: Prisma.XOR<Prisma.ApplicationCreateWithoutMessagesInput, Prisma.ApplicationUncheckedCreateWithoutMessagesInput>
+}
+
+export type ApplicationUpsertWithoutMessagesInput = {
+  update: Prisma.XOR<Prisma.ApplicationUpdateWithoutMessagesInput, Prisma.ApplicationUncheckedUpdateWithoutMessagesInput>
+  create: Prisma.XOR<Prisma.ApplicationCreateWithoutMessagesInput, Prisma.ApplicationUncheckedCreateWithoutMessagesInput>
+  where?: Prisma.ApplicationWhereInput
+}
+
+export type ApplicationUpdateToOneWithWhereWithoutMessagesInput = {
+  where?: Prisma.ApplicationWhereInput
+  data: Prisma.XOR<Prisma.ApplicationUpdateWithoutMessagesInput, Prisma.ApplicationUncheckedUpdateWithoutMessagesInput>
+}
+
+export type ApplicationUpdateWithoutMessagesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumApplicationStatusFieldUpdateOperationsInput | $Enums.ApplicationStatus
+  coverLetter?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  appliedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutApplicationsNestedInput
+  job?: Prisma.JobUpdateOneRequiredWithoutApplicationsNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutApplicationNestedInput
+}
+
+export type ApplicationUncheckedUpdateWithoutMessagesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  jobId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumApplicationStatusFieldUpdateOperationsInput | $Enums.ApplicationStatus
+  coverLetter?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  appliedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutApplicationNestedInput
 }
 
 export type ApplicationCreateManyUserInput = {
@@ -661,6 +750,7 @@ export type ApplicationUpdateWithoutUserInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   job?: Prisma.JobUpdateOneRequiredWithoutApplicationsNestedInput
   notes?: Prisma.NoteUpdateManyWithoutApplicationNestedInput
+  messages?: Prisma.MessageUpdateManyWithoutApplicationNestedInput
 }
 
 export type ApplicationUncheckedUpdateWithoutUserInput = {
@@ -671,6 +761,7 @@ export type ApplicationUncheckedUpdateWithoutUserInput = {
   appliedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   notes?: Prisma.NoteUncheckedUpdateManyWithoutApplicationNestedInput
+  messages?: Prisma.MessageUncheckedUpdateManyWithoutApplicationNestedInput
 }
 
 export type ApplicationUncheckedUpdateManyWithoutUserInput = {
@@ -699,6 +790,7 @@ export type ApplicationUpdateWithoutJobInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutApplicationsNestedInput
   notes?: Prisma.NoteUpdateManyWithoutApplicationNestedInput
+  messages?: Prisma.MessageUpdateManyWithoutApplicationNestedInput
 }
 
 export type ApplicationUncheckedUpdateWithoutJobInput = {
@@ -709,6 +801,7 @@ export type ApplicationUncheckedUpdateWithoutJobInput = {
   appliedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   notes?: Prisma.NoteUncheckedUpdateManyWithoutApplicationNestedInput
+  messages?: Prisma.MessageUncheckedUpdateManyWithoutApplicationNestedInput
 }
 
 export type ApplicationUncheckedUpdateManyWithoutJobInput = {
@@ -727,10 +820,12 @@ export type ApplicationUncheckedUpdateManyWithoutJobInput = {
 
 export type ApplicationCountOutputType = {
   notes: number
+  messages: number
 }
 
 export type ApplicationCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   notes?: boolean | ApplicationCountOutputTypeCountNotesArgs
+  messages?: boolean | ApplicationCountOutputTypeCountMessagesArgs
 }
 
 /**
@@ -750,6 +845,13 @@ export type ApplicationCountOutputTypeCountNotesArgs<ExtArgs extends runtime.Typ
   where?: Prisma.NoteWhereInput
 }
 
+/**
+ * ApplicationCountOutputType without action
+ */
+export type ApplicationCountOutputTypeCountMessagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MessageWhereInput
+}
+
 
 export type ApplicationSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -762,6 +864,7 @@ export type ApplicationSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   job?: boolean | Prisma.JobDefaultArgs<ExtArgs>
   notes?: boolean | Prisma.Application$notesArgs<ExtArgs>
+  messages?: boolean | Prisma.Application$messagesArgs<ExtArgs>
   _count?: boolean | Prisma.ApplicationCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["application"]>
 
@@ -804,6 +907,7 @@ export type ApplicationInclude<ExtArgs extends runtime.Types.Extensions.Internal
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   job?: boolean | Prisma.JobDefaultArgs<ExtArgs>
   notes?: boolean | Prisma.Application$notesArgs<ExtArgs>
+  messages?: boolean | Prisma.Application$messagesArgs<ExtArgs>
   _count?: boolean | Prisma.ApplicationCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ApplicationIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -821,6 +925,7 @@ export type $ApplicationPayload<ExtArgs extends runtime.Types.Extensions.Interna
     user: Prisma.$UserPayload<ExtArgs>
     job: Prisma.$JobPayload<ExtArgs>
     notes: Prisma.$NotePayload<ExtArgs>[]
+    messages: Prisma.$MessagePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1227,6 +1332,7 @@ export interface Prisma__ApplicationClient<T, Null = never, ExtArgs extends runt
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   job<T extends Prisma.JobDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.JobDefaultArgs<ExtArgs>>): Prisma.Prisma__JobClient<runtime.Types.Result.GetResult<Prisma.$JobPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   notes<T extends Prisma.Application$notesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Application$notesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  messages<T extends Prisma.Application$messagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Application$messagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1680,6 +1786,30 @@ export type Application$notesArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   distinct?: Prisma.NoteScalarFieldEnum | Prisma.NoteScalarFieldEnum[]
+}
+
+/**
+ * Application.messages
+ */
+export type Application$messagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Message
+   */
+  select?: Prisma.MessageSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Message
+   */
+  omit?: Prisma.MessageOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MessageInclude<ExtArgs> | null
+  where?: Prisma.MessageWhereInput
+  orderBy?: Prisma.MessageOrderByWithRelationInput | Prisma.MessageOrderByWithRelationInput[]
+  cursor?: Prisma.MessageWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MessageScalarFieldEnum | Prisma.MessageScalarFieldEnum[]
 }
 
 /**

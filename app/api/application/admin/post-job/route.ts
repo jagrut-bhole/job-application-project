@@ -6,7 +6,6 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
   try {
-
     const session = await getServerSession(authOptions);
 
     if (!session) {
@@ -34,8 +33,6 @@ export async function POST(req: NextRequest) {
         }
       );
     }
-
-    
 
     const data = await req.json();
 
@@ -68,13 +65,13 @@ export async function POST(req: NextRequest) {
     }
 
     const company = await prisma.company.findUnique({
-        where: {
-            adminId: session.user.id
-        },
-        select: {
-            id: true
-        }
-    })
+      where: {
+        adminId: session.user.id,
+      },
+      select: {
+        id: true,
+      },
+    });
 
     if (!company) {
       return NextResponse.json(
@@ -84,43 +81,42 @@ export async function POST(req: NextRequest) {
     }
 
     const job = await prisma.job.create({
-        data: {
-            title,
-            description,
-            salary,
-            location,
-            skills,
-            type,
-            status: "OPEN",
-            companyId : company?.id,
-            postedById: session.user.id,
-            postedAt: new Date(),
-            expiresAt
-        }
+      data: {
+        title,
+        description,
+        salary,
+        location,
+        skills,
+        type,
+        status: "OPEN",
+        companyId: company?.id,
+        postedById: session.user.id,
+        postedAt: new Date(),
+        expiresAt,
+      },
     });
 
     return NextResponse.json(
-        {
-            success: true,
-            message: "Job created Successfully!!",
-            data: {
-                id: job.id,
-                title: job.title,
-                description: job.description,
-                salary: job.salary,
-                location: job.location,
-                skills: job.skills,
-                type: job.type,
-                status: job.status,
-                expiresAt: job.expiresAt,
-                postedAt: job.postedAt
-            }
+      {
+        success: true,
+        message: "Job created Successfully!!",
+        data: {
+          id: job.id,
+          title: job.title,
+          description: job.description,
+          salary: job.salary,
+          location: job.location,
+          skills: job.skills,
+          type: job.type,
+          status: job.status,
+          expiresAt: job.expiresAt,
+          postedAt: job.postedAt,
         },
-        {
-            status: 201
-        }
-    )
-    
+      },
+      {
+        status: 201,
+      }
+    );
   } catch (error) {
     console.log("Error at /api/application/admin/post-job :", error);
     return NextResponse.json(

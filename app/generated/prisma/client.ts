@@ -64,3 +64,8 @@ export type Application = Prisma.ApplicationModel
  * 
  */
 export type Note = Prisma.NoteModel
+/**
+ * Model Message
+ * 
+ */
+export type Message = Prisma.MessageModel

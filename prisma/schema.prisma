@@ -20,8 +20,12 @@ model User {
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
-  applications Application[] @relation("appliedBy")
-  companies    Company[]     @relation("managedBy")
+  applications     Application[] @relation("appliedBy")
+  companies        Company[]     @relation("managedBy")
+  postedJobs       Job[]         @relation("postedBy")
+  notes            Note[]        @relation("noteBy")
+  sentMessages     Message[]     @relation("sentMessages")
+  receivedMessages Message[]     @relation("receivedMessages")
 
   @@index([email])
   @@index([role])
@@ -42,7 +46,7 @@ model Company {
   website     String?
   logoUrl     String?
   location    String[]
-  adminId     String @unique
+  adminId     String   @unique
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
@@ -70,10 +74,12 @@ model Job {
   updatedAt   DateTime  @updatedAt
   expiresAt   DateTime?
 
+  postedBy     User          @relation("postedBy", fields: [postedById], references: [id])
   company      Company       @relation("postedIn", fields: [companyId], references: [id], onDelete: Cascade)
   applications Application[] @relation("jobApplications")
 
   @@index([companyId])
+  @@index([postedById])
   @@index([status])
   @@index([type])
 }
@@ -104,9 +110,10 @@ model Application {
   appliedAt   DateTime          @default(now())
   updatedAt   DateTime          @updatedAt
 
-  user  User   @relation("appliedBy", fields: [userId], references: [id], onDelete: Cascade)
-  job   Job    @relation("jobApplications", fields: [jobId], references: [id], onDelete: Cascade)
-  notes Note[] @relation("appNotes")
+  user     User      @relation("appliedBy", fields: [userId], references: [id], onDelete: Cascade)
+  job      Job       @relation("jobApplications", fields: [jobId], references: [id], onDelete: Cascade)
+  notes    Note[]    @relation("appNotes")
+  messages Message[] @relation("applicationMessages")
 
   @@unique([userId, jobId]) // prevents duplicate applications
   @@index([userId])
@@ -126,13 +133,36 @@ enum ApplicationStatus {
 }
 
 // ─────────────────────────────────────────
-// NOTE  (admin adds notes to an application)
+// NOTE  (admin's internal notes on an application — NOT visible to user)
 // ─────────────────────────────────────────
 model Note {
   id            String   @id @default(uuid())
   applicationId String
   text          String
+  addedById     String
   addedAt       DateTime @default(now())
 
+  addedBy     User        @relation("noteBy", fields: [addedById], references: [id])
   application Application @relation("appNotes", fields: [applicationId], references: [id], onDelete: Cascade)
+}
+
+// ─────────────────────────────────────────
+// MESSAGE  (admin ↔ user communication tied to an application)
+// ─────────────────────────────────────────
+model Message {
+  id            String   @id @default(uuid())
+  applicationId String
+  senderId      String
+  receiverId    String
+  text          String
+  isRead        Boolean  @default(false)
+  sentAt        DateTime @default(now())
+
+  application Application @relation("applicationMessages", fields: [applicationId], references: [id], onDelete: Cascade)
+  sender      User        @relation("sentMessages", fields: [senderId], references: [id])
+  receiver    User        @relation("receivedMessages", fields: [receiverId], references: [id])
+
+  @@index([applicationId])
+  @@index([receiverId])
+  @@index([isRead])
 }

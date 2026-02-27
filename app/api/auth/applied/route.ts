@@ -1,14 +1,14 @@
 import prisma from "@/lib/prisma";
-import { authOptions } from "@/lib/auth";
-import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
 import { AppliedSchemaResponse } from "./appliedSchema";
 
-export async function POST(): Promise<NextResponse<AppliedSchemaResponse>> {
+export async function GET(): Promise<NextResponse<AppliedSchemaResponse>> {
   try {
     const session = await getServerSession(authOptions);
 
-    if (!session?.user) {
+    if (!session) {
       return NextResponse.json(
         {
           success: false,
@@ -20,43 +20,62 @@ export async function POST(): Promise<NextResponse<AppliedSchemaResponse>> {
       );
     }
 
-    const user = await prisma.application.findMany({
+    const userEmail = session.user.email;
+
+    const appliedJobs = await prisma.application.findMany({
       where: {
-        userId: session.user.id,
+        user: {
+          email: userEmail,
+        },
       },
-      select: {
-        id: true,
-        company: true,
-        position: true,
-        jobDescription: true,
-        appliedDate: true,
-        status: true,
-        salary: true,
-        location: true,
-        notes: {
+      orderBy: {
+        appliedAt: "desc",
+      },
+      include: {
+        job: {
+          include: {
+            company: {
+              select: {
+                id: true,
+                name: true,
+                logoUrl: true,
+                location: true,
+                website: true,
+              },
+            },
+          },
           select: {
-            text: true,
+            id: true,
+            title: true,
+            description: true,
+            salary: true,
+            location: true,
+            type: true,
+            postedAt: true,
+            status: true,
           },
         },
       },
     });
 
+    const formattedJobs = appliedJobs.map(({ job }) => job);
+
     return NextResponse.json(
       {
         success: true,
-        message: "Applied Applications fetched successfully",
-        data: user,
+        message: "Applied jobs fetched successfully",
+        data: formattedJobs,
       },
       {
         status: 200,
       }
     );
   } catch (error) {
-    console.log("Error at /api/auth/applied : ", error);
+    console.log("Error at /api/auth/applied :", error);
     return NextResponse.json(
       {
         success: false,
-        message: "Server error while fetching applications",
+        message: "Server Error while fetching user's applied jobs",
       },
       {
         status: 500,

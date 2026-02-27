@@ -4,22 +4,25 @@ export const appliedSchema = z.object({
   success: z.boolean(),
   message: z.string(),
   data: z
-    .object({
-      id: z.string(),
-      company: z.string(),
-      position: z.string(),
-      jobDescription: z.string(),
-      appliedDate: z.date(),
-      status: z.string(),
-      salary: z.string().nullable(),
-      location: z.string().nullable(),
-      notes: z
-        .object({
-          text: z.string(),
-        })
-        .array(),
-    })
-    .array()
+    .array(
+      z.object({
+        status: z.enum(["OPEN", "CLOSED", "PAUSED"]).default("OPEN"),
+        id: z.string(),
+        company: z.object({
+          id: z.string(),
+          name: z.string(),
+          website: z.string().nullable(),
+          logoUrl: z.string().nullable(),
+          location: z.array(z.string()).nullable(),
+        }),
+        location: z.string().nullable(),
+        description: z.string(),
+        type: z.enum(["FULL_TIME", "PART_TIME", "CONTRACT", "INTERNSHIP", "REMOTE"]),
+        title: z.string(),
+        salary: z.string().nullable(),
+        postedAt: z.date(),
+      })
+    )
     .optional(),
 });
 
