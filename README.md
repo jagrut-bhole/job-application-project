@@ -12,14 +12,14 @@ Admins post jobs under companies. Users browse open jobs and apply. Each user se
 - [Roles](#roles)
 - [Database Schema](#database-schema)
 - [API Routes](#api-routes)
-  - [Auth Routes](#auth-routes)
-  - [Admin Routes — Companies](#admin-routes--companies)
-  - [Admin Routes — Jobs](#admin-routes--jobs)
-  - [Admin Routes — Applications](#admin-routes--applications)
-  - [Admin Routes — Users](#admin-routes--users)
-  - [Public Routes — Jobs](#public-routes--jobs)
-  - [User Routes — Applications](#user-routes--applications)
-  - [User Routes — Profile](#user-routes--profile)
+    - [Auth Routes](#auth-routes)
+    - [Admin Routes — Companies](#admin-routes--companies)
+    - [Admin Routes — Jobs](#admin-routes--jobs)
+    - [Admin Routes — Applications](#admin-routes--applications)
+    - [Admin Routes — Users](#admin-routes--users)
+    - [Public Routes — Jobs](#public-routes--jobs)
+    - [User Routes — Applications](#user-routes--applications)
+    - [User Routes — Profile](#user-routes--profile)
 - [Application Status Flow](#application-status-flow)
 - [Tech Stack](#tech-stack)
 
@@ -226,11 +226,11 @@ model Note {
 
 ```json
 {
-  "name": "Acme Corp",
-  "description": "We build tools.",
-  "website": "https://acme.com",
-  "logoUrl": "https://...",
-  "location": "San Francisco, CA"
+    "name": "Acme Corp",
+    "description": "We build tools.",
+    "website": "https://acme.com",
+    "logoUrl": "https://...",
+    "location": "San Francisco, CA"
 }
 ```
 
@@ -250,14 +250,14 @@ model Note {
 
 ```json
 {
-  "companyId": "uuid",
-  "title": "Senior Frontend Engineer",
-  "description": "We are looking for...",
-  "salary": "$120k – $160k",
-  "location": "Remote",
-  "type": "FULL_TIME",
-  "status": "OPEN",
-  "expiresAt": "2026-04-01T00:00:00.000Z"
+    "companyId": "uuid",
+    "title": "Senior Frontend Engineer",
+    "description": "We are looking for...",
+    "salary": "$120k – $160k",
+    "location": "Remote",
+    "type": "FULL_TIME",
+    "status": "OPEN",
+    "expiresAt": "2026-04-01T00:00:00.000Z"
 }
 ```
 
@@ -265,13 +265,13 @@ model Note {
 
 ```json
 {
-  "title": "...",
-  "description": "...",
-  "salary": "...",
-  "location": "...",
-  "type": "PART_TIME",
-  "status": "CLOSED",
-  "expiresAt": "..."
+    "title": "...",
+    "description": "...",
+    "salary": "...",
+    "location": "...",
+    "type": "PART_TIME",
+    "status": "CLOSED",
+    "expiresAt": "..."
 }
 ```
 
@@ -292,7 +292,7 @@ model Note {
 
 ```json
 {
-  "status": "SHORTLISTED"
+    "status": "SHORTLISTED"
 }
 ```
 
@@ -300,7 +300,7 @@ model Note {
 
 ```json
 {
-  "text": "Strong portfolio. Schedule interview."
+    "text": "Strong portfolio. Schedule interview."
 }
 ```
 
@@ -347,28 +347,28 @@ These routes are accessible to everyone (authenticated or not) so users can brow
 
 ```json
 {
-  "success": true,
-  "data": [
-    {
-      "id": "uuid",
-      "title": "Senior Frontend Engineer",
-      "type": "FULL_TIME",
-      "location": "Remote",
-      "salary": "$120k – $160k",
-      "postedAt": "2026-02-19T...",
-      "company": {
-        "id": "uuid",
-        "name": "Acme Corp",
-        "logoUrl": "https://...",
-        "location": "San Francisco, CA"
-      }
+    "success": true,
+    "data": [
+        {
+            "id": "uuid",
+            "title": "Senior Frontend Engineer",
+            "type": "FULL_TIME",
+            "location": "Remote",
+            "salary": "$120k – $160k",
+            "postedAt": "2026-02-19T...",
+            "company": {
+                "id": "uuid",
+                "name": "Acme Corp",
+                "logoUrl": "https://...",
+                "location": "San Francisco, CA"
+            }
+        }
+    ],
+    "pagination": {
+        "page": 1,
+        "limit": 20,
+        "total": 84
     }
-  ],
-  "pagination": {
-    "page": 1,
-    "limit": 20,
-    "total": 84
-  }
 }
 ```
 
@@ -387,8 +387,8 @@ These routes are accessible to everyone (authenticated or not) so users can brow
 
 ```json
 {
-  "jobId": "uuid",
-  "coverLetter": "I am excited to apply because..."
+    "jobId": "uuid",
+    "coverLetter": "I am excited to apply because..."
 }
 ```
 
@@ -396,23 +396,23 @@ These routes are accessible to everyone (authenticated or not) so users can brow
 
 ```json
 {
-  "success": true,
-  "data": [
-    {
-      "id": "uuid",
-      "status": "SHORTLISTED",
-      "appliedAt": "2026-02-19T...",
-      "job": {
-        "id": "uuid",
-        "title": "Senior Frontend Engineer",
-        "type": "FULL_TIME",
-        "company": {
-          "name": "Acme Corp",
-          "logoUrl": "https://..."
+    "success": true,
+    "data": [
+        {
+            "id": "uuid",
+            "status": "SHORTLISTED",
+            "appliedAt": "2026-02-19T...",
+            "job": {
+                "id": "uuid",
+                "title": "Senior Frontend Engineer",
+                "type": "FULL_TIME",
+                "company": {
+                    "name": "Acme Corp",
+                    "logoUrl": "https://..."
+                }
+            }
         }
-      }
-    }
-  ]
+    ]
 }
 ```
 

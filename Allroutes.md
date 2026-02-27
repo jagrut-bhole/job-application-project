@@ -15,7 +15,7 @@
 | POST   | `/api/auth/register`        | ✅       | User registration                                                                                                                                                                       |
 | POST   | `/api/auth/[...nextauth]`   | ✅       | NextAuth login/session                                                                                                                                                                  |
 | POST   | `/api/auth/profile`         | ✅       | Get own profile                                                                                                                                                                         |
-| PATCH  | `/api/auth/profile`         | ❌  -> ✅      | **Update** profile (bio, skills, profileImage, resumeUrl) — only GET exists right now                                                                                                   |
+| PATCH  | `/api/auth/profile`         | ❌ -> ✅ | **Update** profile (bio, skills, profileImage, resumeUrl) — only GET exists right now                                                                                                   |
 | PATCH  | `/api/auth/change-password` | ✅       | Change password                                                                                                                                                                         |
 | DELETE | `/api/auth/delete-account`  | ✅       | Delete account                                                                                                                                                                          |
 | POST   | `/api/auth/applied`         | ⚠️ -> ✅ | **OLD SCHEMA** — uses deleted fields (`position`, `company`, `jobDescription`, `appliedDate`). Either delete this file or rewrite it. It is replaced by `/api/application/user/applied` |
@@ -24,13 +24,13 @@
 
 ## USER — Jobs (`/api/application/user/...`)
 
-| Method | Route                                                  | Status | Notes                                                                                       |
-| ------ | ------------------------------------------------------ | ------ | ------------------------------------------------------------------------------------------- |
-| GET    | `/api/application/user/all-jobs`                       | ✅     | Paginated list of OPEN jobs user has NOT applied to                                         |
-| GET    | `/api/application/user/job/[jobId]`                    | ❌     | Single job detail page                                                                      |
-| GET    | `/api/application/user/applied`                        | ⚠️     | **File is EMPTY** — needs to be written. Fetch all applications with job + company + status |
-| POST   | `/api/application/user/apply/[jobId]`                  | ❌     | Apply to a job — creates an `Application` row                                               |
-| PATCH  | `/api/application/user/apply/[applicationId]/withdraw` | ❌     | Withdraw application — sets status to `WITHDRAWN`                                           |
+| Method | Route                                                  | Status                                          | Notes                                                                                       |
+| ------ | ------------------------------------------------------ | ----------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| GET    | `/api/application/user/all-jobs`                       | ✅                                              | Paginated list of OPEN jobs user has NOT applied to                                         |
+| GET    | `/api/application/user/job/[jobId]`                    | ❌ -> ✅                                        | Single job detail page                                                                      |
+| GET    | `/api/application/user/applied`                        | ⚠️ -- Deleted {replaced by `/api/auth/applied`} | **File is EMPTY** — needs to be written. Fetch all applications with job + company + status |
+| POST   | `/api/application/user/apply/[jobId]`                  | ❌ -> ✅                                        | Apply to a job — creates an `Application` row                                               |
+| PATCH  | `/api/application/user/apply/[applicationId]/withdraw` | ❌                                              | Withdraw application — sets status to `WITHDRAWN`                                           |
 
 ---
 
