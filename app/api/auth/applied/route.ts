@@ -33,17 +33,6 @@ export async function GET(): Promise<NextResponse<AppliedSchemaResponse>> {
             },
             include: {
                 job: {
-                    include: {
-                        company: {
-                            select: {
-                                id: true,
-                                name: true,
-                                logoUrl: true,
-                                location: true,
-                                website: true,
-                            },
-                        },
-                    },
                     select: {
                         id: true,
                         title: true,
@@ -53,6 +42,15 @@ export async function GET(): Promise<NextResponse<AppliedSchemaResponse>> {
                         type: true,
                         postedAt: true,
                         status: true,
+                        company: {
+                            select: {
+                                id: true,
+                                name: true,
+                                logoUrl: true,
+                                location: true,
+                                website: true,
+                            },
+                        },
                     },
                 },
             },

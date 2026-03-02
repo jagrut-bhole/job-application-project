@@ -216,6 +216,23 @@ export type BoolWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedBoolFilter<$PrismaModel>
 }
 
+export type EnumNoteTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.NoteType | Prisma.EnumNoteTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.NoteType[] | Prisma.ListEnumNoteTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.NoteType[] | Prisma.ListEnumNoteTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumNoteTypeFilter<$PrismaModel> | $Enums.NoteType
+}
+
+export type EnumNoteTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.NoteType | Prisma.EnumNoteTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.NoteType[] | Prisma.ListEnumNoteTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.NoteType[] | Prisma.ListEnumNoteTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumNoteTypeWithAggregatesFilter<$PrismaModel> | $Enums.NoteType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumNoteTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumNoteTypeFilter<$PrismaModel>
+}
+
 export type NestedStringFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
@@ -429,6 +446,23 @@ export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedBoolFilter<$PrismaModel>
   _max?: Prisma.NestedBoolFilter<$PrismaModel>
+}
+
+export type NestedEnumNoteTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.NoteType | Prisma.EnumNoteTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.NoteType[] | Prisma.ListEnumNoteTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.NoteType[] | Prisma.ListEnumNoteTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumNoteTypeFilter<$PrismaModel> | $Enums.NoteType
+}
+
+export type NestedEnumNoteTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.NoteType | Prisma.EnumNoteTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.NoteType[] | Prisma.ListEnumNoteTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.NoteType[] | Prisma.ListEnumNoteTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumNoteTypeWithAggregatesFilter<$PrismaModel> | $Enums.NoteType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumNoteTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumNoteTypeFilter<$PrismaModel>
 }
 
 

@@ -230,6 +230,7 @@ export type UserWhereInput = {
   companies?: Prisma.CompanyListRelationFilter
   postedJobs?: Prisma.JobListRelationFilter
   notes?: Prisma.NoteListRelationFilter
+  jobNotes?: Prisma.JobNoteListRelationFilter
   sentMessages?: Prisma.MessageListRelationFilter
   receivedMessages?: Prisma.MessageListRelationFilter
 }
@@ -250,6 +251,7 @@ export type UserOrderByWithRelationInput = {
   companies?: Prisma.CompanyOrderByRelationAggregateInput
   postedJobs?: Prisma.JobOrderByRelationAggregateInput
   notes?: Prisma.NoteOrderByRelationAggregateInput
+  jobNotes?: Prisma.JobNoteOrderByRelationAggregateInput
   sentMessages?: Prisma.MessageOrderByRelationAggregateInput
   receivedMessages?: Prisma.MessageOrderByRelationAggregateInput
 }
@@ -273,6 +275,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   companies?: Prisma.CompanyListRelationFilter
   postedJobs?: Prisma.JobListRelationFilter
   notes?: Prisma.NoteListRelationFilter
+  jobNotes?: Prisma.JobNoteListRelationFilter
   sentMessages?: Prisma.MessageListRelationFilter
   receivedMessages?: Prisma.MessageListRelationFilter
 }, "id" | "email">
@@ -327,6 +330,7 @@ export type UserCreateInput = {
   companies?: Prisma.CompanyCreateNestedManyWithoutAdminInput
   postedJobs?: Prisma.JobCreateNestedManyWithoutPostedByInput
   notes?: Prisma.NoteCreateNestedManyWithoutAddedByInput
+  jobNotes?: Prisma.JobNoteCreateNestedManyWithoutAddedByInput
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
 }
@@ -347,6 +351,7 @@ export type UserUncheckedCreateInput = {
   companies?: Prisma.CompanyUncheckedCreateNestedManyWithoutAdminInput
   postedJobs?: Prisma.JobUncheckedCreateNestedManyWithoutPostedByInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutAddedByInput
+  jobNotes?: Prisma.JobNoteUncheckedCreateNestedManyWithoutAddedByInput
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
 }
@@ -367,6 +372,7 @@ export type UserUpdateInput = {
   companies?: Prisma.CompanyUpdateManyWithoutAdminNestedInput
   postedJobs?: Prisma.JobUpdateManyWithoutPostedByNestedInput
   notes?: Prisma.NoteUpdateManyWithoutAddedByNestedInput
+  jobNotes?: Prisma.JobNoteUpdateManyWithoutAddedByNestedInput
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
 }
@@ -387,6 +393,7 @@ export type UserUncheckedUpdateInput = {
   companies?: Prisma.CompanyUncheckedUpdateManyWithoutAdminNestedInput
   postedJobs?: Prisma.JobUncheckedUpdateManyWithoutPostedByNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutAddedByNestedInput
+  jobNotes?: Prisma.JobNoteUncheckedUpdateManyWithoutAddedByNestedInput
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
 }
@@ -595,6 +602,20 @@ export type UserUpdateOneRequiredWithoutReceivedMessagesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutReceivedMessagesInput, Prisma.UserUpdateWithoutReceivedMessagesInput>, Prisma.UserUncheckedUpdateWithoutReceivedMessagesInput>
 }
 
+export type UserCreateNestedOneWithoutJobNotesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutJobNotesInput, Prisma.UserUncheckedCreateWithoutJobNotesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutJobNotesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutJobNotesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutJobNotesInput, Prisma.UserUncheckedCreateWithoutJobNotesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutJobNotesInput
+  upsert?: Prisma.UserUpsertWithoutJobNotesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutJobNotesInput, Prisma.UserUpdateWithoutJobNotesInput>, Prisma.UserUncheckedUpdateWithoutJobNotesInput>
+}
+
 export type UserCreateWithoutCompaniesInput = {
   id?: string
   name: string
@@ -610,6 +631,7 @@ export type UserCreateWithoutCompaniesInput = {
   applications?: Prisma.ApplicationCreateNestedManyWithoutUserInput
   postedJobs?: Prisma.JobCreateNestedManyWithoutPostedByInput
   notes?: Prisma.NoteCreateNestedManyWithoutAddedByInput
+  jobNotes?: Prisma.JobNoteCreateNestedManyWithoutAddedByInput
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
 }
@@ -629,6 +651,7 @@ export type UserUncheckedCreateWithoutCompaniesInput = {
   applications?: Prisma.ApplicationUncheckedCreateNestedManyWithoutUserInput
   postedJobs?: Prisma.JobUncheckedCreateNestedManyWithoutPostedByInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutAddedByInput
+  jobNotes?: Prisma.JobNoteUncheckedCreateNestedManyWithoutAddedByInput
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
 }
@@ -664,6 +687,7 @@ export type UserUpdateWithoutCompaniesInput = {
   applications?: Prisma.ApplicationUpdateManyWithoutUserNestedInput
   postedJobs?: Prisma.JobUpdateManyWithoutPostedByNestedInput
   notes?: Prisma.NoteUpdateManyWithoutAddedByNestedInput
+  jobNotes?: Prisma.JobNoteUpdateManyWithoutAddedByNestedInput
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
 }
@@ -683,6 +707,7 @@ export type UserUncheckedUpdateWithoutCompaniesInput = {
   applications?: Prisma.ApplicationUncheckedUpdateManyWithoutUserNestedInput
   postedJobs?: Prisma.JobUncheckedUpdateManyWithoutPostedByNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutAddedByNestedInput
+  jobNotes?: Prisma.JobNoteUncheckedUpdateManyWithoutAddedByNestedInput
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
 }
@@ -702,6 +727,7 @@ export type UserCreateWithoutPostedJobsInput = {
   applications?: Prisma.ApplicationCreateNestedManyWithoutUserInput
   companies?: Prisma.CompanyCreateNestedManyWithoutAdminInput
   notes?: Prisma.NoteCreateNestedManyWithoutAddedByInput
+  jobNotes?: Prisma.JobNoteCreateNestedManyWithoutAddedByInput
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
 }
@@ -721,6 +747,7 @@ export type UserUncheckedCreateWithoutPostedJobsInput = {
   applications?: Prisma.ApplicationUncheckedCreateNestedManyWithoutUserInput
   companies?: Prisma.CompanyUncheckedCreateNestedManyWithoutAdminInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutAddedByInput
+  jobNotes?: Prisma.JobNoteUncheckedCreateNestedManyWithoutAddedByInput
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
 }
@@ -756,6 +783,7 @@ export type UserUpdateWithoutPostedJobsInput = {
   applications?: Prisma.ApplicationUpdateManyWithoutUserNestedInput
   companies?: Prisma.CompanyUpdateManyWithoutAdminNestedInput
   notes?: Prisma.NoteUpdateManyWithoutAddedByNestedInput
+  jobNotes?: Prisma.JobNoteUpdateManyWithoutAddedByNestedInput
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
 }
@@ -775,6 +803,7 @@ export type UserUncheckedUpdateWithoutPostedJobsInput = {
   applications?: Prisma.ApplicationUncheckedUpdateManyWithoutUserNestedInput
   companies?: Prisma.CompanyUncheckedUpdateManyWithoutAdminNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutAddedByNestedInput
+  jobNotes?: Prisma.JobNoteUncheckedUpdateManyWithoutAddedByNestedInput
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
 }
@@ -794,6 +823,7 @@ export type UserCreateWithoutApplicationsInput = {
   companies?: Prisma.CompanyCreateNestedManyWithoutAdminInput
   postedJobs?: Prisma.JobCreateNestedManyWithoutPostedByInput
   notes?: Prisma.NoteCreateNestedManyWithoutAddedByInput
+  jobNotes?: Prisma.JobNoteCreateNestedManyWithoutAddedByInput
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
 }
@@ -813,6 +843,7 @@ export type UserUncheckedCreateWithoutApplicationsInput = {
   companies?: Prisma.CompanyUncheckedCreateNestedManyWithoutAdminInput
   postedJobs?: Prisma.JobUncheckedCreateNestedManyWithoutPostedByInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutAddedByInput
+  jobNotes?: Prisma.JobNoteUncheckedCreateNestedManyWithoutAddedByInput
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
 }
@@ -848,6 +879,7 @@ export type UserUpdateWithoutApplicationsInput = {
   companies?: Prisma.CompanyUpdateManyWithoutAdminNestedInput
   postedJobs?: Prisma.JobUpdateManyWithoutPostedByNestedInput
   notes?: Prisma.NoteUpdateManyWithoutAddedByNestedInput
+  jobNotes?: Prisma.JobNoteUpdateManyWithoutAddedByNestedInput
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
 }
@@ -867,6 +899,7 @@ export type UserUncheckedUpdateWithoutApplicationsInput = {
   companies?: Prisma.CompanyUncheckedUpdateManyWithoutAdminNestedInput
   postedJobs?: Prisma.JobUncheckedUpdateManyWithoutPostedByNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutAddedByNestedInput
+  jobNotes?: Prisma.JobNoteUncheckedUpdateManyWithoutAddedByNestedInput
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
 }
@@ -886,6 +919,7 @@ export type UserCreateWithoutNotesInput = {
   applications?: Prisma.ApplicationCreateNestedManyWithoutUserInput
   companies?: Prisma.CompanyCreateNestedManyWithoutAdminInput
   postedJobs?: Prisma.JobCreateNestedManyWithoutPostedByInput
+  jobNotes?: Prisma.JobNoteCreateNestedManyWithoutAddedByInput
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
 }
@@ -905,6 +939,7 @@ export type UserUncheckedCreateWithoutNotesInput = {
   applications?: Prisma.ApplicationUncheckedCreateNestedManyWithoutUserInput
   companies?: Prisma.CompanyUncheckedCreateNestedManyWithoutAdminInput
   postedJobs?: Prisma.JobUncheckedCreateNestedManyWithoutPostedByInput
+  jobNotes?: Prisma.JobNoteUncheckedCreateNestedManyWithoutAddedByInput
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
 }
@@ -940,6 +975,7 @@ export type UserUpdateWithoutNotesInput = {
   applications?: Prisma.ApplicationUpdateManyWithoutUserNestedInput
   companies?: Prisma.CompanyUpdateManyWithoutAdminNestedInput
   postedJobs?: Prisma.JobUpdateManyWithoutPostedByNestedInput
+  jobNotes?: Prisma.JobNoteUpdateManyWithoutAddedByNestedInput
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
 }
@@ -959,6 +995,7 @@ export type UserUncheckedUpdateWithoutNotesInput = {
   applications?: Prisma.ApplicationUncheckedUpdateManyWithoutUserNestedInput
   companies?: Prisma.CompanyUncheckedUpdateManyWithoutAdminNestedInput
   postedJobs?: Prisma.JobUncheckedUpdateManyWithoutPostedByNestedInput
+  jobNotes?: Prisma.JobNoteUncheckedUpdateManyWithoutAddedByNestedInput
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
 }
@@ -979,6 +1016,7 @@ export type UserCreateWithoutSentMessagesInput = {
   companies?: Prisma.CompanyCreateNestedManyWithoutAdminInput
   postedJobs?: Prisma.JobCreateNestedManyWithoutPostedByInput
   notes?: Prisma.NoteCreateNestedManyWithoutAddedByInput
+  jobNotes?: Prisma.JobNoteCreateNestedManyWithoutAddedByInput
   receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
 }
 
@@ -998,6 +1036,7 @@ export type UserUncheckedCreateWithoutSentMessagesInput = {
   companies?: Prisma.CompanyUncheckedCreateNestedManyWithoutAdminInput
   postedJobs?: Prisma.JobUncheckedCreateNestedManyWithoutPostedByInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutAddedByInput
+  jobNotes?: Prisma.JobNoteUncheckedCreateNestedManyWithoutAddedByInput
   receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
 }
 
@@ -1022,6 +1061,7 @@ export type UserCreateWithoutReceivedMessagesInput = {
   companies?: Prisma.CompanyCreateNestedManyWithoutAdminInput
   postedJobs?: Prisma.JobCreateNestedManyWithoutPostedByInput
   notes?: Prisma.NoteCreateNestedManyWithoutAddedByInput
+  jobNotes?: Prisma.JobNoteCreateNestedManyWithoutAddedByInput
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
 }
 
@@ -1041,6 +1081,7 @@ export type UserUncheckedCreateWithoutReceivedMessagesInput = {
   companies?: Prisma.CompanyUncheckedCreateNestedManyWithoutAdminInput
   postedJobs?: Prisma.JobUncheckedCreateNestedManyWithoutPostedByInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutAddedByInput
+  jobNotes?: Prisma.JobNoteUncheckedCreateNestedManyWithoutAddedByInput
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
 }
 
@@ -1076,6 +1117,7 @@ export type UserUpdateWithoutSentMessagesInput = {
   companies?: Prisma.CompanyUpdateManyWithoutAdminNestedInput
   postedJobs?: Prisma.JobUpdateManyWithoutPostedByNestedInput
   notes?: Prisma.NoteUpdateManyWithoutAddedByNestedInput
+  jobNotes?: Prisma.JobNoteUpdateManyWithoutAddedByNestedInput
   receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
 }
 
@@ -1095,6 +1137,7 @@ export type UserUncheckedUpdateWithoutSentMessagesInput = {
   companies?: Prisma.CompanyUncheckedUpdateManyWithoutAdminNestedInput
   postedJobs?: Prisma.JobUncheckedUpdateManyWithoutPostedByNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutAddedByNestedInput
+  jobNotes?: Prisma.JobNoteUncheckedUpdateManyWithoutAddedByNestedInput
   receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
 }
 
@@ -1125,6 +1168,7 @@ export type UserUpdateWithoutReceivedMessagesInput = {
   companies?: Prisma.CompanyUpdateManyWithoutAdminNestedInput
   postedJobs?: Prisma.JobUpdateManyWithoutPostedByNestedInput
   notes?: Prisma.NoteUpdateManyWithoutAddedByNestedInput
+  jobNotes?: Prisma.JobNoteUpdateManyWithoutAddedByNestedInput
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
 }
 
@@ -1144,7 +1188,104 @@ export type UserUncheckedUpdateWithoutReceivedMessagesInput = {
   companies?: Prisma.CompanyUncheckedUpdateManyWithoutAdminNestedInput
   postedJobs?: Prisma.JobUncheckedUpdateManyWithoutPostedByNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutAddedByNestedInput
+  jobNotes?: Prisma.JobNoteUncheckedUpdateManyWithoutAddedByNestedInput
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+}
+
+export type UserCreateWithoutJobNotesInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  role?: $Enums.Role
+  bio?: string | null
+  skills?: Prisma.UserCreateskillsInput | string[]
+  resumeUrl?: string | null
+  profileImage?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  applications?: Prisma.ApplicationCreateNestedManyWithoutUserInput
+  companies?: Prisma.CompanyCreateNestedManyWithoutAdminInput
+  postedJobs?: Prisma.JobCreateNestedManyWithoutPostedByInput
+  notes?: Prisma.NoteCreateNestedManyWithoutAddedByInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
+}
+
+export type UserUncheckedCreateWithoutJobNotesInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  role?: $Enums.Role
+  bio?: string | null
+  skills?: Prisma.UserCreateskillsInput | string[]
+  resumeUrl?: string | null
+  profileImage?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  applications?: Prisma.ApplicationUncheckedCreateNestedManyWithoutUserInput
+  companies?: Prisma.CompanyUncheckedCreateNestedManyWithoutAdminInput
+  postedJobs?: Prisma.JobUncheckedCreateNestedManyWithoutPostedByInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutAddedByInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
+}
+
+export type UserCreateOrConnectWithoutJobNotesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutJobNotesInput, Prisma.UserUncheckedCreateWithoutJobNotesInput>
+}
+
+export type UserUpsertWithoutJobNotesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutJobNotesInput, Prisma.UserUncheckedUpdateWithoutJobNotesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutJobNotesInput, Prisma.UserUncheckedCreateWithoutJobNotesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutJobNotesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutJobNotesInput, Prisma.UserUncheckedUpdateWithoutJobNotesInput>
+}
+
+export type UserUpdateWithoutJobNotesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  skills?: Prisma.UserUpdateskillsInput | string[]
+  resumeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  applications?: Prisma.ApplicationUpdateManyWithoutUserNestedInput
+  companies?: Prisma.CompanyUpdateManyWithoutAdminNestedInput
+  postedJobs?: Prisma.JobUpdateManyWithoutPostedByNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutAddedByNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
+}
+
+export type UserUncheckedUpdateWithoutJobNotesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  skills?: Prisma.UserUpdateskillsInput | string[]
+  resumeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  applications?: Prisma.ApplicationUncheckedUpdateManyWithoutUserNestedInput
+  companies?: Prisma.CompanyUncheckedUpdateManyWithoutAdminNestedInput
+  postedJobs?: Prisma.JobUncheckedUpdateManyWithoutPostedByNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutAddedByNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
 }
 
 
@@ -1157,6 +1298,7 @@ export type UserCountOutputType = {
   companies: number
   postedJobs: number
   notes: number
+  jobNotes: number
   sentMessages: number
   receivedMessages: number
 }
@@ -1166,6 +1308,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   companies?: boolean | UserCountOutputTypeCountCompaniesArgs
   postedJobs?: boolean | UserCountOutputTypeCountPostedJobsArgs
   notes?: boolean | UserCountOutputTypeCountNotesArgs
+  jobNotes?: boolean | UserCountOutputTypeCountJobNotesArgs
   sentMessages?: boolean | UserCountOutputTypeCountSentMessagesArgs
   receivedMessages?: boolean | UserCountOutputTypeCountReceivedMessagesArgs
 }
@@ -1211,6 +1354,13 @@ export type UserCountOutputTypeCountNotesArgs<ExtArgs extends runtime.Types.Exte
 /**
  * UserCountOutputType without action
  */
+export type UserCountOutputTypeCountJobNotesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.JobNoteWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
 export type UserCountOutputTypeCountSentMessagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.MessageWhereInput
 }
@@ -1239,6 +1389,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   companies?: boolean | Prisma.User$companiesArgs<ExtArgs>
   postedJobs?: boolean | Prisma.User$postedJobsArgs<ExtArgs>
   notes?: boolean | Prisma.User$notesArgs<ExtArgs>
+  jobNotes?: boolean | Prisma.User$jobNotesArgs<ExtArgs>
   sentMessages?: boolean | Prisma.User$sentMessagesArgs<ExtArgs>
   receivedMessages?: boolean | Prisma.User$receivedMessagesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -1292,6 +1443,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   companies?: boolean | Prisma.User$companiesArgs<ExtArgs>
   postedJobs?: boolean | Prisma.User$postedJobsArgs<ExtArgs>
   notes?: boolean | Prisma.User$notesArgs<ExtArgs>
+  jobNotes?: boolean | Prisma.User$jobNotesArgs<ExtArgs>
   sentMessages?: boolean | Prisma.User$sentMessagesArgs<ExtArgs>
   receivedMessages?: boolean | Prisma.User$receivedMessagesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -1306,6 +1458,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     companies: Prisma.$CompanyPayload<ExtArgs>[]
     postedJobs: Prisma.$JobPayload<ExtArgs>[]
     notes: Prisma.$NotePayload<ExtArgs>[]
+    jobNotes: Prisma.$JobNotePayload<ExtArgs>[]
     sentMessages: Prisma.$MessagePayload<ExtArgs>[]
     receivedMessages: Prisma.$MessagePayload<ExtArgs>[]
   }
@@ -1719,6 +1872,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   companies<T extends Prisma.User$companiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$companiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   postedJobs<T extends Prisma.User$postedJobsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$postedJobsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$JobPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   notes<T extends Prisma.User$notesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$notesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  jobNotes<T extends Prisma.User$jobNotesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$jobNotesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$JobNotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   sentMessages<T extends Prisma.User$sentMessagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sentMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   receivedMessages<T extends Prisma.User$receivedMessagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$receivedMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
@@ -2242,6 +2396,30 @@ export type User$notesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
   take?: number
   skip?: number
   distinct?: Prisma.NoteScalarFieldEnum | Prisma.NoteScalarFieldEnum[]
+}
+
+/**
+ * User.jobNotes
+ */
+export type User$jobNotesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the JobNote
+   */
+  select?: Prisma.JobNoteSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the JobNote
+   */
+  omit?: Prisma.JobNoteOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.JobNoteInclude<ExtArgs> | null
+  where?: Prisma.JobNoteWhereInput
+  orderBy?: Prisma.JobNoteOrderByWithRelationInput | Prisma.JobNoteOrderByWithRelationInput[]
+  cursor?: Prisma.JobNoteWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.JobNoteScalarFieldEnum | Prisma.JobNoteScalarFieldEnum[]
 }
 
 /**

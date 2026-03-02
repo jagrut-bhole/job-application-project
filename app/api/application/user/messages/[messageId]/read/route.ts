@@ -1,9 +1,13 @@
 import prisma from "@/lib/prisma";
-import { NextResponse, NextRequest } from "next/server";
-import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
+import { getServerSession } from "next-auth";
+import { NextResponse, NextRequest } from "next/server";
 
-export async function PATCH(req: NextRequest, { params }: { params: { applicationId: string } }) {
+export async function PATCH(
+    req: NextRequest,
+    { params }: { params: Promise<{ messageId: string }> }
+) {
+    const { messageId } = await params;
     try {
         const session = await getServerSession(authOptions);
 
@@ -11,7 +15,7 @@ export async function PATCH(req: NextRequest, { params }: { params: { applicatio
             return NextResponse.json(
                 {
                     success: false,
-                    message: "Unauthorized Request",
+                    message: "You are not authenticated.",
                 },
                 {
                     status: 401,
@@ -19,65 +23,61 @@ export async function PATCH(req: NextRequest, { params }: { params: { applicatio
             );
         }
 
-        const userId = session.user.id;
-
-        const applicationId = params.applicationId;
-
-        const applicationDetails = await prisma.application.findUnique({
+        const message = await prisma.message.findUnique({
             where: {
-                id: applicationId,
+                id: messageId,
             },
         });
 
-        if (!applicationDetails) {
+        if (!message) {
             return NextResponse.json(
                 {
                     success: false,
-                    message: "Application not found",
+                    message: "Invalid message ID.",
                 },
                 {
-                    status: 404,
+                    status: 400,
                 }
             );
         }
 
-        if (applicationDetails.status !== "PENDING") {
+        if (message.receiverId !== session.user.id) {
             return NextResponse.json(
                 {
                     success: false,
-                    message: "Only pending applications can be withdrawn",
+                    message: "You are not authorized to mark this message as read.",
                 },
                 {
-                    status: 401,
+                    status: 403,
                 }
             );
         }
 
-        await prisma.application.update({
+        await prisma.message.update({
             where: {
-                id: applicationId,
+                id: message.id,
             },
             data: {
-                status: "WITHDRAWN",
+                isRead: true,
             },
         });
 
         return NextResponse.json(
             {
                 success: true,
-                message: "Application withdrawn successfully",
+                message: "Message marked as read.",
             },
             {
                 status: 200,
             }
         );
     } catch (error) {
-        console.log("Error at /api/application/user/apply/[applicationId] [PATCH]:", error);
+        console.log("Error at /api/application/user/messages/[messageId]/read :", error);
 
         return NextResponse.json(
             {
                 success: false,
-                message: "Server Error while withdrawing application",
+                message: "An error occurred while marking the message as read.",
             },
             {
                 status: 500,

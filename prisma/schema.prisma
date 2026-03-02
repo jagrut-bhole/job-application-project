@@ -24,6 +24,7 @@ model User {
   companies        Company[]     @relation("managedBy")
   postedJobs       Job[]         @relation("postedBy")
   notes            Note[]        @relation("noteBy")
+  jobNotes         JobNote[]     @relation("jobNoteBy")
   sentMessages     Message[]     @relation("sentMessages")
   receivedMessages Message[]     @relation("receivedMessages")
 
@@ -77,6 +78,7 @@ model Job {
   postedBy     User          @relation("postedBy", fields: [postedById], references: [id])
   company      Company       @relation("postedIn", fields: [companyId], references: [id], onDelete: Cascade)
   applications Application[] @relation("jobApplications")
+  notes        JobNote[]     @relation("jobNotes")
 
   @@index([companyId])
   @@index([postedById])
@@ -165,4 +167,26 @@ model Message {
   @@index([applicationId])
   @@index([receiverId])
   @@index([isRead])
+}
+// ─────────────────────────────────────────
+// JOB NOTE  (activity log on a Job — system-generated or manually added by admin)
+// ─────────────────────────────────────────
+model JobNote {
+  id        String      @id @default(uuid())
+  jobId     String
+  addedById String
+  text      String
+  type      NoteType    @default(USER)
+  addedAt   DateTime    @default(now())
+
+  job     Job  @relation("jobNotes", fields: [jobId], references: [id], onDelete: Cascade)
+  addedBy User @relation("jobNoteBy", fields: [addedById], references: [id])
+
+  @@index([jobId])
+  @@index([addedById])
+}
+
+enum NoteType {
+  SYSTEM
+  USER
 }

@@ -49,3 +49,11 @@ export const ApplicationStatus = {
 } as const
 
 export type ApplicationStatus = (typeof ApplicationStatus)[keyof typeof ApplicationStatus]
+
+
+export const NoteType = {
+  SYSTEM: 'SYSTEM',
+  USER: 'USER'
+} as const
+
+export type NoteType = (typeof NoteType)[keyof typeof NoteType]

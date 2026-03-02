@@ -69,3 +69,8 @@ export type Note = Prisma.NoteModel
  * 
  */
 export type Message = Prisma.MessageModel
+/**
+ * Model JobNote
+ * 
+ */
+export type JobNote = Prisma.JobNoteModel
